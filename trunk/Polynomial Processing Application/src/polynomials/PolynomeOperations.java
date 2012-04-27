@@ -1,5 +1,4 @@
-package polynomials;
-import Polynomial;
+package src.polynomials;
 
 public class PolynomeOperations {
 
