@@ -1,3 +1,4 @@
+package src.polynomials;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
