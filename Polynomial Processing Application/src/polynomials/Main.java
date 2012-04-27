@@ -1,5 +1,4 @@
-package polynomials;
-import VisualPolynomial;
+package src.polynomials;
 
 public class Main {
 
