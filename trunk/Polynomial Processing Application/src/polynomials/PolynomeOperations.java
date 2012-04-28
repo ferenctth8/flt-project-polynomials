@@ -136,10 +136,7 @@ public class PolynomeOperations {
 		// then we perform the requested operation
 		for (int i = 0; i <= q.getDegree(); i++) {
 			for (int j = 0; j <= p.getDegree(); j++)
-				result.setElementAt(
-						i + j,
-						result.getElementAt(i + j) + p.getElementAt(j)
-								* q.getElementAt(i));
+				result.setElementAt(i + j, result.getElementAt(i + j) + p.getElementAt(j)* q.getElementAt(i));
 		}
 		// and finally return the result
 		return result;
