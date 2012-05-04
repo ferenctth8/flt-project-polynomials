@@ -26,17 +26,19 @@ import java_cup.runtime.*;
 }%
 
 %%
-[A-Z]{1} { return symbol(sym.POL_VAR);  }
+[A-Z]{1} { return symbol(sym.POL_VAR); }
+[a-z]+ { return symbol(sym.VAR); }
 "X" { return symbol(sym.TERMX); }
 "^^"[0-9]+ { return symbol(sym.POWER_OP); }
 "+"  { return symbol(sym.PLUS); }
 "-"  { return symbol(sym.MINUS); }
 "*"  { return symbol(sym.TIMES); }
 "/"  { return symbol(sym.DIVIDE); }
-")"  { return symbol(sym.RBRACKET); }
-"("  { return symbol(sym.LBRACKET); }
 "I" { return symbol(sym.INTEGRAL); }
 "D" { return symbol(sym.DIFFERENTIAL); }
+")"  { return symbol(sym.RBRACKET); }
+"("  { return symbol(sym.LBRACKET); }
+"="  { return symbol(sym.EQUAL); }
 [0-9]+ { return symbol(sym.NUMBER); }
 ";"  { return symbol(sym.SEMI); } 
 .|\n { }
