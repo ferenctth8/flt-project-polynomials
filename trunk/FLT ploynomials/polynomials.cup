@@ -1,0 +1,20 @@
+package flt.polynomialInterpreter.parser;
+
+import java_cup.runtime.*;
+
+parser code {:
+ /* custom data */
+ private String customData;
+:}
+
+/* ------------Declaration of Terminals and Non Terminals Section----------- */
+
+terminal          SEMI, PLUS, MINUS, TIMES, DIVIDE, SCALAR_MULTIPLY, INTEGRAL, DIFFERENTIAL, EVALUATE;
+terminal Integer  DEGREE,FREE_TERM,NUMBER;
+  
+non terminal Polynomial     TermP,TermQ,Sum;
+non terminal Polynomial		Multiplier, Multiplicand,Product;
+non terminal Polynomial    	Dividend, Divisor, Quotient, Remainder;
+non terminal Polynomial     Minuend, Subtrahend, Difference;
+non terminal Polynomial     FirstFormalDerivative;
+non terminal Polynomial		FirstFormalIntegral;
