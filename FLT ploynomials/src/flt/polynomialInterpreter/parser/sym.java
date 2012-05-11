@@ -18,6 +18,7 @@ public interface sym {
 	public static final int MINUS = 6;
 	public static final int TIMES = 7;
 	public static final int DIVIDE = 8;
+	//public static final int MODE = 17;
 	//unary operators
 	public static final int DIFFERENTIAL = 9;
 	public static final int INTEGRAL = 10;
