@@ -1,0 +1,57 @@
+<project name="PolynomeInterpretor" basedir="." default="generateSources">
+
+	<property file="build.properties" />
+	
+	<property name="srcDir" value="src" />
+	<property name="classesDir" value="bin" />
+	<property name="libDir" value="lib" />
+
+	<path id="build.classpath">
+		<fileset dir="${libDir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef name="jflex" classname="JFlex.anttask.JFlexTask">
+		<classpath>
+			<fileset dir="D:\Egyetem\eclipse---workspace\FLT ploynomials\lib">
+				<include name="*.jar" />
+			</fileset>
+		</classpath>
+	</taskdef>
+
+	<taskdef name="cup" classname="java_cup.anttask.CUPTask">
+		<classpath>
+			<fileset dir="${libDir}">
+				<include name="*.jar" />
+			</fileset>
+		</classpath>
+	</taskdef>
+
+	<target name="clean">
+		<delete dir="${classesDir}" />
+	</target>
+
+	<target name="generateSources">
+		<jflex file="polynomials.flex" destdir="${srcDir}" />
+		<!--
+		<cup srcfile="polynomials.cup" destdir="${srcDir}" 
+			interface="true" parser="InterpreterParser" nosummary="true"/>
+		-->	
+	</target>
+
+	<target name="compile" depends="generateSources">
+		<mkdir dir="${classesDir}" />
+		<javac srcdir="${srcDir}" destdir="${classesDir}" classpathref="build.classpath" />
+	</target>
+
+	<target name="run" depends="compile">
+		<java classname="${main.class}">
+			<classpath>
+				<pathelement location="${classesDir}" />
+				<path refid="build.classpath" />
+			</classpath>
+		</java>
+	</target>
+
+</project>
