@@ -11,9 +11,10 @@ res = Q(3);
 
 M(X) = P(X) * Q(X);
 
+
 P(X) = Q(X) * C(X) + R(X);
 
-N(X) = D(P(X));
+N(X) = Differentiate(P(X));
 
-O(X) = I(Q(X));
+O(X) = Integrate(Q(X));
 
