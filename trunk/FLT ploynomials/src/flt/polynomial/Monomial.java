@@ -6,7 +6,7 @@ public class Monomial {
 	 * The attribute list of the current class.The only attributes of a monome are its degree and coefficient. 
 	 */
 	private int degree;
-	private double coefficient;
+	private double coefficient;//verifciare coeficient sign
 	
 	/**
 	 * The default parameterless constructor.
