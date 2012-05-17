@@ -21,7 +21,7 @@ public class SubtractPolynomials {
 		this.subtrahend = q;
 	}
 	
-	public Polynomial addPolynomials(){
+	public Polynomial subtractPolynomials(){
 		int mindeg = 0;
 		int maxdeg = 0;
 		boolean isLonger = false;
