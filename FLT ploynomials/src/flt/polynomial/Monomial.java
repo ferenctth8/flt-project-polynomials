@@ -26,6 +26,7 @@ public class Monomial {
 	}
 
 	/**
+	 * The current method returns the degree of a given monome
 	 * @return the degree of the monome in question
 	 */
 	public int getDegree() {
@@ -33,6 +34,7 @@ public class Monomial {
 	}
 
 	/**
+	 * The current method sets the degree of a monome
 	 * @param degree the degree to set for the current monomial
 	 */
 	public void setDegree(int degree) {
@@ -40,6 +42,7 @@ public class Monomial {
 	}
 
 	/**
+	 * The current method returns the monome coefficient
 	 * @return the coefficient of the current monomial 
 	 */
 	public double getCoefficient() {
@@ -47,6 +50,7 @@ public class Monomial {
 	}
 
 	/**
+	 * The current method sets the monome coefficient
 	 * @param coefficient the coefficient to set for the current monomial
 	 */
 	public void setCoefficient(double coefficient) {
@@ -56,27 +60,44 @@ public class Monomial {
 	/**
 	 * The overridden toString() method - used for returning the String representation of the current object
 	 * According to the values of the coefficient and the degree, we may have the following five cases for return:
-	 * coefficient = 1, degree <> 0 => return X^^degree
-	 * coefficient = 1, degree = 0 => return 1.0
-	 * coefficient <> 1, degree <> 0 => return coefficient*X^^degree
-	 * coefficient <> 1, degree = 0 => return coefficient
 	 * coefficient = 0 => return empty String  
+	 * coefficient = 1, degree <> 0 => return X^^degree
+	 * coefficient = -1, degree <> 0 => return -X^^degree 
+	 * coefficient = 1, degree = 0 => return 1.0
+	 * coefficient = -1, degree = 0 => return -1.0
+	 * coefficient > 1, degree <> 0 => return coefficient*X^^degree
+	 * coefficient < -1, degree <> 0 => return -coefficient*X^^degree 
+	 * coefficient > 1, degree = 0 => return coefficient
+	 * coefficient < -1, degree = 0 => return coefficient 
 	 */
 	public String toString() {
+		if (this.coefficient == 0.0){
+			return "";
+		}
 		if (this.coefficient == 1.0 && this.degree != 0){
 			return "X^^" + this.degree;
 		} 
+		if (this.coefficient == -1.0 && this.degree != 0){
+			return "-X^^" + this.degree;
+		}
 		if (this.coefficient == 1.0 && this.degree == 0){
 			return "1.0";
 		}
-		if (this.coefficient != 1.0 && this.degree != 0){
+		if (this.coefficient == -1.0 && this.degree == 0){
+			return "-1.0";
+		}
+		if (this.coefficient > 1.0 && this.degree != 0){
 			return this.coefficient + "*X^^" + this.degree;
 		}
-		if (this.coefficient != 1.0 && this.degree == 0){
+		if (this.coefficient < -1.0 && this.degree != 0){
+			return "-" + (-1)*this.coefficient + "*X^^" + this.degree;
+		}
+		if (this.coefficient > 1.0 && this.degree == 0){
 			return new Double(this.coefficient).toString();
 		}
-		if (this.coefficient == 0.0){
-			return "";
+		if (this.coefficient < 1.0 && this.degree == 0){
+			Double newCoefficient = new Double(this.coefficient);
+			return "-"+(-1)*newCoefficient;
 		}
 		return null;
 	}
