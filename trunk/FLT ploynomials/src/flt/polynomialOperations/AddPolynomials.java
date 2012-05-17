@@ -19,6 +19,8 @@ public class AddPolynomials {
 	public AddPolynomials(Polynomial p, Polynomial q){
 		this.termP = p;
 		this.termQ = q;
+		//call the polynomial addition method
+		this.addPolynomials();
 	}
 	
 	/**
