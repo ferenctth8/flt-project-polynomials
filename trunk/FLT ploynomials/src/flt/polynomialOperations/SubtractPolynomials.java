@@ -19,6 +19,8 @@ public class SubtractPolynomials {
 	public SubtractPolynomials(Polynomial p, Polynomial q){
 		this.minuend = p;
 		this.subtrahend = q;
+		//invoke the subtraction method
+		this.subtractPolynomials();
 	}
 	
 	/**
