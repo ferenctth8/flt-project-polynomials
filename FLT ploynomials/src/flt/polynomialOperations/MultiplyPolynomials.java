@@ -27,7 +27,7 @@ public class MultiplyPolynomials {
 	 */
 	private Polynomial multiplyPolynomials(){
 		// create the result Polynomial object with the degree equal to the sum of the degrees of the parameters
-		Polynomial result = new Polynomial(multiplicand.getDegree() + multiplier.getDegree());
+		Polynomial multiplicationResult = new Polynomial(multiplicand.getDegree() + multiplier.getDegree());
 		// then we perform the requested operation
 		for (int i = 0; i <= multiplicand.getDegree(); i++) {
 			//take the coefficient of the multiplicand
@@ -36,13 +36,13 @@ public class MultiplyPolynomials {
 				//then take the coefficients of the multiplier, 1 by 1
 				double coefficient2 = multiplier.getElementAt(i).getCoefficient();
 				//and of the result from the sum of the current coefficients
-				double resCoefficient = result.getElementAt(i+j).getCoefficient();
+				double resCoefficient = multiplicationResult.getElementAt(i+j).getCoefficient();
 				//set the value of the new coefficient
-				result.getElementAt(i+j).setCoefficient(resCoefficient + coefficient1 * coefficient2);
+				multiplicationResult.getElementAt(i+j).setCoefficient(resCoefficient + coefficient1 * coefficient2);
 			}
 		}
 		// and finally return the result
-		return result;
+		return multiplicationResult;
 	}
 
 }
