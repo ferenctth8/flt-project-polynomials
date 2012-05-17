@@ -43,7 +43,7 @@ public class AddPolynomials {
 			maxdeg = termQ.getDegree();
 			mindeg = termP.getDegree();
 		}
-		Polynomial result = new Polynomial(maxdeg);
+		Polynomial additionResult = new Polynomial(maxdeg);
 		// until finishing with the operand of lower degree, perform the addition of the coefficients normally
 		for (int i = 0; i <= mindeg; i++) {
 			//get the coefficients in question
@@ -52,16 +52,16 @@ public class AddPolynomials {
 			//compute their sum
 			double sum = coefficient1 + coefficient2;
 			//set the result at the corresponding position
-			result.setElementAt(i, new Monomial(i,sum));
+			additionResult.setElementAt(i, new Monomial(i,sum));
 		}
 		// copy the rest of the coefficients from the array associated to the operand possessing a higher degree
 		for (int i = mindeg + 1; i <= maxdeg; i++) {
 			if (isLonger) {
-				result.setElementAt(i, termP.getElementAt(i));
+				additionResult.setElementAt(i, termP.getElementAt(i));
 			} else {
-				result.setElementAt(i, termQ.getElementAt(i));
+				additionResult.setElementAt(i, termQ.getElementAt(i));
 			}
 		}
-		return result;
+		return additionResult;
 	}
 }
