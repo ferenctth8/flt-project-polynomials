@@ -3,11 +3,11 @@ package flt.polynomial;
 public class Monomial {
 
 	/**
-	 * The attribute list of the current class.The only attributes of a monome are its degree and coefficient. 
+	 * The attribute list of the current class.The only attributes of a monome are its degree, coefficient and sign. 
 	 */
 	private int degree;
 	private double coefficient;//verifciare coeficient sign
-	
+		
 	/**
 	 * The default parameterless constructor.
 	 */
@@ -19,6 +19,7 @@ public class Monomial {
 	 * The parameterized class constructor responsible for setting the degree and the coefficient of the Monome in question
 	 * @param deg - the degree of the termX from its body
 	 * @param coefficient - the coefficient of the term in question
+	 * @param sign - the sign of the coefficient
 	 */
 	public Monomial(int deg, double coefficient){
 		this.degree = deg;
@@ -59,8 +60,9 @@ public class Monomial {
 
 	/**
 	 * The overridden toString() method - used for returning the String representation of the current object
-	 * According to the values of the coefficient and the degree, we may have the following five cases for return:
-	 * coefficient = 0 => return empty String  
+	 * According to the values of the coefficient and the degree, we may have the following ten cases for return:
+	 * coefficient = 0, degree <> 0 => return empty String 
+	 * coefficient = 0, degree = 0 => return 0.0 
 	 * coefficient = 1, degree <> 0 => return X^^degree
 	 * coefficient = -1, degree <> 0 => return -X^^degree 
 	 * coefficient = 1, degree = 0 => return 1.0
@@ -71,7 +73,7 @@ public class Monomial {
 	 * coefficient < -1, degree = 0 => return coefficient 
 	 */
 	public String toString() {
-		if (this.coefficient == 0.0){
+		if (this.coefficient == 0.0 && this.degree !=0){
 			return "";
 		}
 		if (this.coefficient == 1.0 && this.degree != 0){
@@ -99,7 +101,7 @@ public class Monomial {
 			Double newCoefficient = new Double(this.coefficient);
 			return "-"+(-1)*newCoefficient;
 		}
-		return null;
+		return "0.0";
 	}
 	
 	
