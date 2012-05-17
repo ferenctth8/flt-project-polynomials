@@ -6,7 +6,7 @@ import flt.polynomial.Polynomial;
 public class SubtractPolynomials {
 
 	/**
-	 * The attribute list of the current class - contains the 2 terms (Polynomials) to be added
+	 * The attribute list of the current class - contains the 2 terms (Polynomials) to be subtracted
 	 */
 	private Polynomial minuend;
 	private Polynomial subtrahend;
