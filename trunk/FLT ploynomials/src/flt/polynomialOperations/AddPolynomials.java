@@ -27,7 +27,7 @@ public class AddPolynomials {
 	 * The method addPolynomials() is responsible for the addition of the current class attributes
 	 * @return the result of the addition operation
 	 */
-	public Polynomial addPolynomials(){
+	private Polynomial addPolynomials(){
 		int mindeg = 0;
 		int maxdeg = 0;
 		boolean isLonger = false;
