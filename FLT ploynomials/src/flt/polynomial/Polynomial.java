@@ -1,14 +1,14 @@
 package flt.polynomial;
 
 public class Polynomial {
-	
+
 	/**
 	 * The attribute list of the current Polynomial class: the degree of the current polynomial - 
 	 * the maximum one out of the component monomials - and the list of monomials. 
 	 */
 	private int polynomialDegree;
 	private Monomial[] monomeComponentList;
-	
+
 	/**
 	 * The default parameterless class constructor, Polynomial(), is responsible for 
 	 * setting up a new object, initially empty.It is only specified here, because 
@@ -16,28 +16,71 @@ public class Polynomial {
 	 * version.
 	 */
 	public Polynomial(){
-		
+
 	}
+
+	/**
+	 * The parameterized constructor used for the building of a Polynomial in case of 
+	 * obtaining it by an operation - addition, division, subtraction or multiplication 
+	 * @param deg - the degree of the new Polynomial
+	 */
+	public Polynomial(int deg){
+		//set the degree first
+		this.polynomialDegree = deg;
+		//set the size of the monomial vector
+		this.monomeComponentList = new Monomial[deg+1];
+	}	
 
 	/**
 	 * The constructor Polynomial() has the task of building a given object of this
 	 * class with the degree given as an integer parameter to it, as well as set the list
 	 * of monomes which make up the current Polynomial object
-	 * @param deg - the integer to be used as a degree indicator of the current 
+	 * @param degree - the integer to be used as a degree indicator of the current 
 	 *              Polynomial object
 	 * @param monomes - the list of monomes which make up the current polynomial
 	 */
 	public Polynomial(int degree, Monomial[] monomes){
 		//set the degree first
 		this.polynomialDegree = degree;
-		//set the size of the monomial vectors
+		//set the size of the monomial vector
 		this.monomeComponentList = new Monomial[degree+1];
 		//create and initialize the components of the vector in question
 		for (int i=0; i<polynomialDegree+1; i++){
 			monomeComponentList[i] = monomes[i];
 		}
 	}
-	
+
+	/**
+	 * The class constructor used for initializing the new Polynomial object obtained with the 
+	 * help of a scalar multiplication
+	 * @param scalar - the scalar the Polynomial is multiplied with
+	 * @param p - the initial Polynomial
+	 */
+	public Polynomial(int scalar, Polynomial p){
+		//check if we have a non-zero scalar and act according to the result 
+		if (scalar!=0){
+			//set the degree of the result to be the degree of the polynomial Parameter
+			this.polynomialDegree = p.getDegree();
+			//set the size of the monome component vectors to that of the Polynomial
+			this.monomeComponentList = new Monomial[polynomialDegree+1];
+			//create and initialize the monome components in question
+			for (int i=0; i<polynomialDegree+1; i++){
+				//get the monome coefficient in question
+				double oldCoefficient = p.getElementAt(i).getCoefficient();
+				//set the new coefficient of p to be the scalar * the old one
+				p.getElementAt(i).setCoefficient(scalar * oldCoefficient);
+				monomeComponentList[i] = p.getElementAt(i);
+			}
+		} else {
+			//in case of scalar being 0, just put 1 element in the vector
+			this.polynomialDegree = 0;
+			//set the vector size to 1
+			this.monomeComponentList = new Monomial[1];
+			//set the only element of the vector to 0
+			this.monomeComponentList[0] = new Monomial(0,0.0);
+		} 		
+	}	
+
 	/**
 	 * The method toString() is inherited from class Object, here it is overridden 
 	 * in order to output the Polynomial object created by the class constructor 
@@ -50,8 +93,8 @@ public class Polynomial {
 		//coefficient of X^0
 		String s =""; 
 		if (polynomialDegree > 0){
-		s = this.monomeComponentList[0].toString() + " + ";
-		//attach successively the remaining terms of the Polynomial to the String
+			s = this.monomeComponentList[0].toString() + " + ";
+			//attach successively the remaining terms of the Polynomial to the String
 			for (int i = 1; i < this.polynomialDegree; i++){
 				s += this.monomeComponentList[i].toString() + " + ";
 			}
@@ -62,7 +105,7 @@ public class Polynomial {
 		}
 		return s;
 	}
-	
+
 	/**
 	 * The method getMonomeComponentList() returns the monomeComponentList 
 	 * array containing the monome components of a given Polynomial object     
