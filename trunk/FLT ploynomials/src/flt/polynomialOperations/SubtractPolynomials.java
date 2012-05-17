@@ -27,7 +27,7 @@ public class SubtractPolynomials {
 	 * The method subtractPolynomials() is responsible for the subtraction of the 2 attributes of the current class
 	 * @return the result of the subtraction
 	 */
-	public Polynomial subtractPolynomials(){
+	private Polynomial subtractPolynomials(){
 		int mindeg = 0;
 		int maxdeg = 0;
 		boolean isLonger = false;
