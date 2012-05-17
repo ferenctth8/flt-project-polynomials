@@ -17,8 +17,14 @@ public class MultiplyPolynomials {
 	public MultiplyPolynomials(Polynomial p, Polynomial q){
 		this.multiplicand= p;
 		this.multiplier = q;
-	}
+		//invoke the multiplication method
+		this.multiplyPolynomials();
+	} 
 
+	/**
+	 * The method multiplyPolynomials() computes the product of the 2 class attributes
+	 * @return the product of the operation in question
+	 */
 	public Polynomial multiplyPolynomials(){
 		// create the result Polynomial object with the degree equal to the sum of the degrees of the parameters
 		Polynomial result = new Polynomial(multiplicand.getDegree() + multiplier.getDegree());
