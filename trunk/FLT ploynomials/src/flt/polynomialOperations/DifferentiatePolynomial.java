@@ -36,5 +36,4 @@ public class DifferentiatePolynomial {
 		return result;				
 	}
 
-
 }
