@@ -25,15 +25,15 @@ public class DifferentiatePolynomial {
 	 */	
 	private Polynomial differentiatePolynomial() {
 		//create the object which is to be returned as a process result
-		Polynomial result = new Polynomial(difInput.getDegree() - 1);
+		Polynomial differentiationResult = new Polynomial(difInput.getDegree() - 1);
 		for (int i = difInput.getDegree(); i > 0; i--) {
 			//get the current monome component of the input polynomial
 			double currentCoefficient = difInput.getElementAt(i).getCoefficient();
 			//compute formal derivative of order 1 by simply multiplying the current coefficient with the old power
-			result.getElementAt(i - 1).setCoefficient(currentCoefficient*i);
+			differentiationResult.getElementAt(i - 1).setCoefficient(currentCoefficient*i);
 			//result.setElementAt(i - 1, new Monomial(i - 1, currentCoefficient*i));
 		}
-		return result;				
+		return differentiationResult;				
 	}
 
 }
