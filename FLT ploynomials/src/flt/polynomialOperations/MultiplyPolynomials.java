@@ -25,7 +25,7 @@ public class MultiplyPolynomials {
 	 * The method multiplyPolynomials() computes the product of the 2 class attributes
 	 * @return the product of the operation in question
 	 */
-	public Polynomial multiplyPolynomials(){
+	private Polynomial multiplyPolynomials(){
 		// create the result Polynomial object with the degree equal to the sum of the degrees of the parameters
 		Polynomial result = new Polynomial(multiplicand.getDegree() + multiplier.getDegree());
 		// then we perform the requested operation
