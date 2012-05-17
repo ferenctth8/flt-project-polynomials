@@ -43,7 +43,7 @@ public class SubtractPolynomials {
 			maxdeg = subtrahend.getDegree();
 			mindeg = minuend.getDegree();
 		}
-		Polynomial result = new Polynomial(maxdeg);
+		Polynomial subtractionResult = new Polynomial(maxdeg);
 		// until finishing with the operand of lower degree, perform the addition of the coefficients normally
 		for (int i = 0; i <= mindeg; i++) {
 			//get the coefficients in question
@@ -52,16 +52,16 @@ public class SubtractPolynomials {
 			//compute their sum
 			double difference = coefficient1 - coefficient2;
 			//set the result at the corresponding position
-			result.setElementAt(i, new Monomial(i,difference));
+			subtractionResult.setElementAt(i, new Monomial(i,difference));
 		}
 		// copy the rest of the coefficients from the array associated to the operand possessing a higher degree
 		for (int i = mindeg + 1; i <= maxdeg; i++) {
 			if (isLonger) {
-				result.setElementAt(i, minuend.getElementAt(i));
+				subtractionResult.setElementAt(i, minuend.getElementAt(i));
 			} else {
-				result.setElementAt(i, subtrahend.getElementAt(i));
+				subtractionResult.setElementAt(i, subtrahend.getElementAt(i));
 			}
 		}
-		return result;
+		return subtractionResult;
 	}
 }
