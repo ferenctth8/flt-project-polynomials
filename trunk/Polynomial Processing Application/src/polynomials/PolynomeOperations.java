@@ -30,8 +30,7 @@ public class PolynomeOperations {
 
 		// compare the 2 degrees to see which one will be assigned to the result
 		// of the operation; in addition also establish the a similar relation
-		// for
-		// the nbOfCoefficients of the result
+		// for the nbOfCoefficients of the result
 		isLonger = q.getDegree() < p.getDegree();
 		if (q.getDegree() < p.getDegree()) {
 			maxdeg = p.getDegree();
@@ -41,15 +40,11 @@ public class PolynomeOperations {
 			mindeg = p.getDegree();
 		}
 		Polynomial result = new Polynomial(maxdeg);
-		// until finishing with the operand of lower degree, perform the
-		// addition
-		// of the coefficients normally
+		// until finishing with the operand of lower degree, perform the addition of the coefficients normally
 		for (int i = 0; i <= mindeg; i++) {
 			result.setElementAt(i, p.getElementAt(i) + q.getElementAt(i));
 		}
-		// copy the rest of the coefficients from the array associated to the
-		// operand
-		// possessing a higher degree
+		// copy the rest of the coefficients from the array associated to the operand possessing a higher degree
 		for (int i = mindeg + 1; i <= maxdeg; i++) {
 			if (isLonger) {
 				result.setElementAt(i, p.getElementAt(i));
