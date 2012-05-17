@@ -20,7 +20,7 @@ public class DifferentiatePolynomial {
 	}
 
 	/**
-	 * The method computeFormalDerivative() is a method designed for computing the first formal derivative of a given Polynomial object.
+	 * The method differentiatePolynomial() is a method designed for computing the first formal derivative of a given Polynomial object.
 	 * @return result - the Polynomial object being the result of the differentiation
 	 */	
 	private Polynomial differentiatePolynomial() {
