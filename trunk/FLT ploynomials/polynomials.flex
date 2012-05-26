@@ -32,6 +32,7 @@ import java_cup.runtime.*;
 "-"  { return symbol(sym.MINUS); }
 "*"  { return symbol(sym.TIMES); }
 "/"  { return symbol(sym.DIVIDE); }
+"%"  { return symbol(sym.MODE); }
 ";"  { return symbol(sym.SEMI); } 
 "Integrate" { return symbol(sym.INTEGRAL); }
 "Differentiate" { return symbol(sym.DIFFERENTIAL); }
