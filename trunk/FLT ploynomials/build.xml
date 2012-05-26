@@ -34,10 +34,8 @@
 
 	<target name="generateSources">
 		<jflex file="polynomials.flex" destdir="${srcDir}" />
-		<!--
 		<cup srcfile="polynomials.cup" destdir="${srcDir}" 
-			interface="true" parser="InterpreterParser" nosummary="true"/>
-		-->	
+			interface="true" parser="PolynomialParser" nosummary="true"/>
 	</target>
 
 	<target name="compile" depends="generateSources">
