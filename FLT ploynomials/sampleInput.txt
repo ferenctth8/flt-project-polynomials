@@ -7,14 +7,11 @@ G(X) = P(X) - Q(X);
 
 H(X) = 3*P(X);
 
-res = Q(3); 
-
-M(X) = P(X) * Q(X);
-
+M(X) = P(X) * (X^^2 + X^^1 + 1);
 
 P(X) = Q(X) * C(X) + R(X);
 
-N(X) = Differentiate(P(X));
+N(X) = Diff(P(X));
 
-O(X) = Integrate(Q(X));
+O(X) = Integ(Q(X));
 
