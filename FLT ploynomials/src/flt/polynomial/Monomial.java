@@ -8,12 +8,6 @@ public class Monomial {
 	private int degree;
 	private double coefficient;//verifciare coeficient sign
 		
-	/**
-	 * The default parameterless constructor.
-	 */
-	public Monomial(){
-		
-	} 
 	
 	/**
 	 * The parameterized class constructor responsible for setting the degree and the coefficient of the Monome in question
