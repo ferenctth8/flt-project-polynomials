@@ -1,6 +1,7 @@
 package flt.polynomialInterpreter.parser;
 
 import java_cup.runtime.*;
+import flt.polynomialOperations.*;
 
 parser code {:
  /* custom data */
@@ -9,12 +10,74 @@ parser code {:
 
 /* ------------Declaration of Terminals and Non Terminals Section----------- */
 
-terminal          SEMI, PLUS, MINUS, TIMES, DIVIDE, SCALAR_MULTIPLY, INTEGRAL, DIFFERENTIAL, EVALUATE;
-terminal Integer  DEGREE,FREE_TERM,NUMBER;
-  
-non terminal Polynomial     TermP,TermQ,Sum;
-non terminal Polynomial		Multiplier, Multiplicand,Product;
-non terminal Polynomial    	Dividend, Divisor, Quotient, Remainder;
-non terminal Polynomial     Minuend, Subtrahend, Difference;
-non terminal Polynomial     FirstFormalDerivative;
-non terminal Polynomial		FirstFormalIntegral;
+terminal          SEMI, PLUS, MINUS, TIMES, DIVIDE, LBRACKET, RBRACKET, POWER_OP, EQUAL, INTEGRAL, DIFFERENTIAL, MODE;
+terminal Integer  NUMBER;
+terminal String   POL_VAR, VAR, TERMX;
+
+non terminal Monomial       monome; 
+non terminal Polynomial     polynomial, polynomial_op;
+non terminal Polynomial     sum;
+non terminal Polynomial		product;
+non terminal Polynomial    	dividend;
+non terminal Polynomial     difference;
+non terminal Polynomial     firstFormalDerivative;
+non terminal Polynomial		firstFormalIntegral;
+
+non terminal Expression     gexpr, aexpr, dexpr, iexpr;
+
+/* ---------------------Grammar Section ------------------------------------ */
+
+   monome ::= NUMBER:nr1 TIMES TERMX POWER_OP NUMBER:nr2 {: RESULT = new Monomial(new Integer(nr2.intValue()), new Double(nr1.doubleValue())); :}  
+                  | TERMX POWER_OP NUMBER:nr {: RESULT = new Monomial(1, new Double(nr.doubleValue())); :}
+              | TERMX {: RESULT = new Monomial(1, 1.0); :}
+              | NUMBER:nr TIMES TERMX {: RESULT = new Monomial(new Integer(nr.intValue()), 1.0); :}
+              | NUMBER:nr {: RESULT = new Monomial(0, new Double(nr.doubleValue())); :}
+              ;
+              
+   polynomial ::= polynomial:p PLUS monome:m {: RESULT = new Polynomial(p, m); :}
+              | polynomial:p MINUS monome:m {: RESULT = new Polynomial(p, m); :}
+              | monome:m {: RESULT = new Monomial(m.getDegree(), m.getCoefficient()); :}
+              | POL_VAR LBRACKET TERMX RBRACKET EQUAL monome:m SEMI {: RESULT = new Polynomial(m.getDegree(), m); :}
+              ;
+                           
+   polynomial_op ::=  NUMBER:nr TIMES LBRACKET polynomial:p RBRACKET {: RESULT = new Polynomial(nr, p); :}
+                 ;
+              
+   sum ::= LBRACKET polynomial:termA RBRACKET PLUS LBRACKET polynomial:termB RBRACKET SEMI {: RESULT = PolynomialOperations.add(termA, termB); :}
+       ;  
+         
+   difference ::= LBRACKET polynomial:minuend RBRACKET MINUS LBRACKET polynomial:subtrahend RBRACKET SEMI {: RESULT = PolynomialOperations.subtract(minuend, subtrahend); :}
+              ; 
+    
+   product ::= LBRACKET polynomial:multiplicand RBRACKET MINUS LBRACKET polynomial:multiplier RBRACKET SEMI {: RESULT = PolynomialOperations.multiply(multiplicand, multiplier); :}
+           ;
+           
+   quotient ::= LBRACKET polynomial:a RBRACKET DIVIDE LBRACKET polynomial:b RBRACKET SEMI {: RESULT = PolynomialOperations.computeQuotient(a,b); :}
+            ;
+            
+   remainder ::= LBRACKET polynomial:a RBRACKET MODE LBRACKET polynomial:b RBRACKET SEMI {: RESULT = PolynomialOperations.computeRemainder(a,b); :}   
+             ;
+             
+   firstFormalDerivative ::= DIFFERENTIAL LBRACKET polynomial:p RBRACKET SEMI {: RESULT = PolynomialOperations.differentiate(p); :}
+                         ;
+                         
+   firstFormalIntegral ::= INTEGRAL LBRACKET polynomial:p RBRACKET SEMI {: RESULT = PolynomialOperations.integrate(p); :}
+                       ;
+   
+   gexpr ::=   aexpr:e {: RESULT = e; :}
+             | dexpr:e {: RESULT = e; :}
+             | iexpr:e {: RESULT = e; :}
+             ;
+                          
+   aexpr ::=   polynomial:e1 PLUS polynomial:e2 SEMI {: RESULT = new ArithmethicExpression(e1, e2, ArithmethicExpression.ADDITION); :}
+             | polynomial:e1 MINUS polynomial:e2 SEMI {: RESULT = new ArithmethicExpression(e1, e2, ArithemthicExpression.SUBTRACTION); :}
+             | polynomial:e1 TIMES polynomial:e2 SEMI {: RESULT = new ArithmethicExpression(e1, e2, ArithmethicExpression.MULTIPLICATION); :}
+             | polynomial:e1 DIVIDE polynomial:e2 SEMI {: RESULT = new ArithmethicExpression(e1, e2, ArithmethicExpression.DIVISION); :}
+             | polynomial:e1 MODE polynomial:e2 SEMI {: RESULT = new ArithmethicExpression(e1, e2, ArithmethicExpression.REMAINDER); :}
+             ;
+   
+   dexpr ::=  DIFFERENTIAL LBRACKET polynomial:p RBRACKET SEMI {: RESULT = new DifferentialExpression(p); :}
+         ;
+   
+   iexpr ::=   INTEGRAL LBRACKET polynomial:p RBRACKET SEMI {: RESULT = new IntegralExpression(p); :}
+         ;
