@@ -10,16 +10,6 @@ public class Polynomial {
 	private Monomial[] monomeComponentList;
 
 	/**
-	 * The default parameterless class constructor, Polynomial(), is responsible for 
-	 * setting up a new object, initially empty.It is only specified here, because 
-	 * of not being provided by Java due to the usage of its previous, parameterized 
-	 * version.
-	 */
-	public Polynomial(){
-
-	}
-
-	/**
 	 * The parameterized constructor used for the building of a Polynomial in case of 
 	 * obtaining it by an operation - addition, division, subtraction or multiplication 
 	 * @param deg - the degree of the new Polynomial
@@ -49,6 +39,37 @@ public class Polynomial {
 			monomeComponentList[i] = monomes[i];
 		}
 	}
+	
+	/**
+	 * The class constructor in question builds a new Polynomial using an existing one
+	 * and a Monomial type object
+	 * @param p - the initial Polynomial
+	 * @param q - the new Monomial to be added
+	 */
+	public Polynomial(Polynomial p, Monomial q){
+		//set the new Polynomial degree
+		this.polynomialDegree = q.getDegree();
+		//create the new Monomial List
+		this.monomeComponentList = new Monomial[polynomialDegree+1];
+		//create the new Polynomial
+		//first set the initial part of the new object
+		for (int i=0; i<p.polynomialDegree+1; i++){
+			monomeComponentList[i] = p.getMonomialAt(i);
+		}
+		//then see if there is a need for padding with 0s
+		int difference = q.getDegree() - p.getDegree();
+		if (difference != 1){
+			//pad with 0s - create the filling monomes
+			for (int i=p.getDegree()+1; i<q.getDegree(); i++){
+				monomeComponentList[i] = new Monomial(i,0.0);
+			}
+			//add the last element 
+			this.monomeComponentList[q.getDegree()] = q;
+		} else {
+			//just add the last element
+			this.monomeComponentList[q.getDegree()] = q;
+		}
+	}
 
 	/**
 	 * The class constructor used for initializing the new Polynomial object obtained with the 
@@ -66,10 +87,10 @@ public class Polynomial {
 			//create and initialize the monome components in question
 			for (int i=0; i<polynomialDegree+1; i++){
 				//get the monome coefficient in question
-				double oldCoefficient = p.getElementAt(i).getCoefficient();
+				double oldCoefficient = p.getMonomialAt(i).getCoefficient();
 				//set the new coefficient of p to be the scalar * the old one
-				p.getElementAt(i).setCoefficient(scalar * oldCoefficient);
-				monomeComponentList[i] = p.getElementAt(i);
+				p.getMonomialAt(i).setCoefficient(scalar * oldCoefficient);
+				monomeComponentList[i] = p.getMonomialAt(i);
 			}
 		} else {
 			//in case of scalar being 0, just put 1 element in the vector
@@ -80,6 +101,17 @@ public class Polynomial {
 			this.monomeComponentList[0] = new Monomial(0,0.0);
 		} 		
 	}	
+
+	/**
+	 * Another class constructor - namely the one responsible for the building of Polynomial which is a single Monomial
+	 * @param degree - the degree of the Monomial to use for building
+	 * @param m - the Monomial in question
+	 */
+	public Polynomial(int degree, Monomial m) {
+		this.polynomialDegree = degree;
+		this.monomeComponentList = new Monomial[1];
+		this.monomeComponentList[0] = m;
+	}
 
 	/**
 	 * The method toString() is inherited from class Object, here it is overridden 
@@ -179,7 +211,7 @@ public class Polynomial {
 	 * @return - the Monomial element of the coefficient vector situated at the position given
 	 *           as a parameter to the method
 	 */
-	public Monomial getElementAt(int i){
+	public Monomial getMonomialAt(int i){
 		return monomeComponentList[i];
 	}
 
@@ -189,7 +221,7 @@ public class Polynomial {
 	 * @param i - an integer value given the element index
 	 * @param value - the double element to be put inside the array at the specified index
 	 */
-	public void setElementAt(int i, Monomial monomial){
+	public void setMonomialAt(int i, Monomial monomial){
 		monomeComponentList[i] = monomial;
 	}
 
