@@ -1,5 +1,6 @@
 package src.polynomials;
 
+
 public class PolynomeOperations {
 
 	/**
@@ -236,4 +237,6 @@ public class PolynomeOperations {
 		}
 		return result;
 	}
+	
+	
 }
