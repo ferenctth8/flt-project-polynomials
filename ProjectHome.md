@@ -1,0 +1,1 @@
+We will implement a polynomial interpreter using Java Eclipse IDE and the JFlex+Java Cup libraries
